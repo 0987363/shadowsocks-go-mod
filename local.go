@@ -281,7 +281,7 @@ func createServerConn(rawaddr []byte, addr string, line chan connStat) (remote *
             continue;
         }
 	}
-    fmt.Println("current id:", srvId, " current cnt:", connCnt, " connCnt: ", servers.connCnt[0], " ", servers.connCnt[1], " ", servers.connCnt[2], " ", )
+    fmt.Println("current id:", srvId, " current cnt:", connCnt, " connCnt: ", servers.connCnt)
 
     if srvId > -1 {
         cs := connStat{srvId, 1}
@@ -386,7 +386,7 @@ func run(listenAddr string) {
             select {
                 case cs := <- line:
                     servers.connCnt[cs.srvId] += cs.conn
-                    fmt.Println("act connCnt: ", servers.connCnt[0], " ", servers.connCnt[1], " ", servers.connCnt[2], " ", )
+                    fmt.Println("act connCnt: ", servers.connCnt)
                     if servers.connCnt[cs.srvId] < 0 {
                         servers.connCnt[cs.srvId] = 0
                     }
